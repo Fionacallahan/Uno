@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main
 	{
 		//making a comment 
+		//making another comment for homework 
 		
 		static Scanner userStringInput = new Scanner(System.in);
 	    static Scanner userIntInput = new Scanner(System.in);
