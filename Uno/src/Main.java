@@ -66,6 +66,10 @@ public class Main
 								playerName = playerFour;
 								play(fourDeck);
 							}
+						for (int i = 0; i <= 50; i ++)
+							{
+								System.out.println(" ");
+							}
 					}
 				
 				
@@ -95,6 +99,7 @@ public class Main
 		
 		public static void play(ArrayList <Card> player) 
 			{
+				System.out.println("Top card in deck: " + discard.get(discard.size() - 1).getColor() + " " + discard.get(discard.size() - 1).getIcon());
 				System.out.println();
 				System.out.println(playerName + ", its your turn. Here is your deck. Type the number next to the card you would like to play. If you cannot play, and would like to draw, press an 8");
 				for (int i = 0; i <= player.size() - 1; i ++)
@@ -108,43 +113,205 @@ public class Main
 						Deck.deck.remove(0);
 						//play(player);
 					}
-				else if (player.get(card - 1).getIcon() == "reverse") // REVERSE
+				else if (player.get(card - 1).getIcon().equals("reverse")) // REVERSE
 					{
 						discard.add(player.get(card - 1));
 						if (clockwise == false) {
 							clockwise = true;
-							currentPlayerNumber ++;
+							currentPlayerNumber += 1;
 							}
 						else if (clockwise == true) {
 							clockwise = false;
-							currentPlayerNumber --;
+							currentPlayerNumber -= 1;
 						}
 					}
-				else if (player.get(card - 1).getIcon() == "+2") //PLUS TWO
+				else if (player.get(card - 1).getIcon().equals("+2")) //PLUS TWO
 					{
-						twoDeck.add(Deck.deck.get(0));
-						Deck.deck.remove((0));
-						twoDeck.add(Deck.deck.get(0));
-						Deck.deck.remove(0);
+						if (currentPlayerNumber == 1 || currentPlayerNumber == 5)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 1 ; i ++)
+											{
+												twoDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else
+									{
+										for (int i = 0; i <= 1 ; i ++)
+											{
+												fourDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+							}
+						else if (currentPlayerNumber == 2 || currentPlayerNumber == 6)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 1 ; i ++)
+											{
+												threeDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else
+									{
+										for (int i = 0; i <= 1 ; i ++)
+											{
+												oneDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								
+							}
+						else if (currentPlayerNumber == 3 || currentPlayerNumber == -1)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 1 ; i ++)
+											{
+												fourDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else if (clockwise == false)
+									{
+										for (int i = 0; i <= 1 ; i ++)
+											{
+												twoDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								
+							}
+						else if (currentPlayerNumber == 4 || currentPlayerNumber == 0)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 1 ; i ++)
+											{
+												oneDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else {
+									for (int i = 0; i <= 1 ; i ++)
+										{
+											threeDeck.add(Deck.deck.get(i));
+											Deck.deck.remove((i));
+										}
+								}
+						
+							}
 						discard.add(player.get(card - 1));
+						if (clockwise == false)
+							{
+								currentPlayerNumber -= 2;
+							}
+						else if (clockwise == true)
+							{
+								currentPlayerNumber += 2;
+							}
+						
 					}
-				else if (player.get(card - 1).getIcon() == "wild +4") // PLUSFOUR
+				else if (player.get(card - 1).getIcon().equals("wild +4")) // PLUSFOUR
 					{
-						twoDeck.add(Deck.deck.get(0));
-						Deck.deck.remove((0));
-						twoDeck.add(Deck.deck.get(0));
-						Deck.deck.remove(0);
-						twoDeck.add(Deck.deck.get(0));
-						Deck.deck.remove((0));
-						twoDeck.add(Deck.deck.get(0));
-						Deck.deck.remove(0);
+						
+						if (currentPlayerNumber == 1 || currentPlayerNumber == 5)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 3; i ++)
+											{
+												twoDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else
+									{
+										for (int i = 0; i <= 3; i ++)
+											{
+												fourDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+							}
+						else if (currentPlayerNumber == 2 || currentPlayerNumber == 6)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 3; i ++)
+											{
+												threeDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else
+									{
+										for (int i = 0; i <= 3; i ++)
+											{
+												oneDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								
+							}
+						else if (currentPlayerNumber == 3 || currentPlayerNumber == -1)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 3; i ++)
+											{
+												fourDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else if (clockwise == false)
+									{
+										for (int i = 0; i <= 3; i ++)
+											{
+												twoDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								
+							}
+						else if (currentPlayerNumber == 4 || currentPlayerNumber == 0)
+							{
+								if (clockwise == true)
+									{
+										for (int i = 0; i <= 3; i ++)
+											{
+												oneDeck.add(Deck.deck.get(i));
+												Deck.deck.remove((i));
+											}
+									}
+								else {
+									for (int i = 0; i <= 3; i ++)
+										{
+											threeDeck.add(Deck.deck.get(i));
+											Deck.deck.remove((i));
+										}
+								}
+						
+							}
 						System.out.println("What color would you like to change the card to?");
 						String colorPlusFour = userStringInput.nextLine();
 						System.out.println("The color is now " + colorPlusFour + ".");
 						discard.add(player.get(card - 1));
+						if (clockwise == false)
+							{
+								currentPlayerNumber -= 2;
+							}
+						else if (clockwise == true)
+							{
+								currentPlayerNumber += 2;
+							}
 					}
 				
-				else if (player.get(card - 1).getIcon() == "skip") //SKIP
+				else if (player.get(card - 1).getIcon().equals("skip")) //SKIP
 					{
 						discard.add(player.get(card - 1));
 						if (clockwise == false)
@@ -155,8 +322,9 @@ public class Main
 							{
 								currentPlayerNumber += 2;
 							}
+					}
 					
-				else if (player.get(card - 1).getIcon() == "wild") // WILD
+				else if (player.get(card - 1).getIcon().equals("wild")) // WILD
 					{
 						System.out.println("What color would you like to change the card to?");
 						String colorPlusFour = userStringInput.nextLine();
@@ -173,9 +341,6 @@ public class Main
 					}
 				else
 					{
-						discard.add(player.get(card - 1));
-						System.out.println(discard.get(0));
-						player.remove(card - 1);
 						if (clockwise == false)
 							{
 								currentPlayerNumber -= 1;
@@ -184,6 +349,8 @@ public class Main
 							{
 								currentPlayerNumber += 1;
 							}
+						discard.add(player.get(card - 1));
+						player.remove(card - 1);
 						
 					}
 				
@@ -196,4 +363,3 @@ public class Main
 			}
 			}
 		
-	}
