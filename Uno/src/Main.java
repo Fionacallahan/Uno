@@ -66,10 +66,9 @@ public class Main
 								playerName = playerFour;
 								play(fourDeck);
 							}
-						for (int i = 0; i <= 50; i ++)
-							{
-								System.out.println(" ");
-							}
+						
+					seeIfWin();
+						
 					}
 				
 				
@@ -107,6 +106,7 @@ public class Main
 						System.out.println(i + 1 + ") " + player.get(i).getColor() + " " +  player.get(i).getIcon());
 					}
 				int card = userIntInput.nextInt();
+				
 				if (card == 8)
 					{
 						player.add(Deck.deck.get(0));
@@ -361,5 +361,35 @@ public class Main
 				
 				
 			}
+		
+		
+		
+		public static void seeIfWin()
+		{
+			if (oneDeck.size() == 1)
+				{
+					System.out.println(playerOne + " has UNO!");
+				}
+			else if (twoDeck.size() == 1)
+				{
+					System.out.println(playerTwo + " has UNO!");
+				}
+			else if (threeDeck.size() == 1)
+				{
+					System.out.println(playerThree + " has UNO!");
+				}
+			else if (fourDeck.size() == 1)
+				{
+					System.out.println(playerFour + " has UNO!");
+				}
+		}
+		
+		
+		
+		
+		
+		
+		
+	
 			}
 		
