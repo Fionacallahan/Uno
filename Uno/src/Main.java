@@ -44,7 +44,7 @@ public class Main
 				Deck.shuffle();
 				deal();
 				start();
-				while (oneDeck.size() >= 1)
+				while (oneDeck.size() >= 1 && twoDeck.size() >= 1 && threeDeck.size() >= 1 && fourDeck.size() >= 1)
 					{
 					
 						for (int i = 0; i <= 5; i ++)
@@ -54,6 +54,7 @@ public class Main
 						if (currentPlayerNumber == 1 || currentPlayerNumber == 5)
 							{
 								playerName = playerOne;
+								currentPlayerNumber = 1;
 								play(oneDeck);
 							}
 						else if (currentPlayerNumber == 2 || currentPlayerNumber == 6)
@@ -63,7 +64,7 @@ public class Main
 								play(twoDeck);
 								
 							}
-						else if (currentPlayerNumber == 3 || currentPlayerNumber == -1)
+						else if (currentPlayerNumber == 3 || currentPlayerNumber == -1 )
 							{
 								playerName = playerThree;
 								currentPlayerNumber = 3;
@@ -72,6 +73,7 @@ public class Main
 						else if (currentPlayerNumber == 4 || currentPlayerNumber == 0)
 							{
 								playerName = playerFour;
+								currentPlayerNumber = 4;
 								play(fourDeck);
 							}
 						
@@ -267,6 +269,9 @@ public class Main
 					}
 				else if (icons.equals("+4")) // PLUSFOUR
 					{
+					
+					System.out.println("What color would you like to change the card to?");
+					String colorPlusFour = userStringInput.nextLine();
 						
 						if (currentPlayerNumber == 1 || currentPlayerNumber == 5)
 							{
@@ -354,8 +359,7 @@ public class Main
 								}
 						
 							}
-						System.out.println("What color would you like to change the card to?");
-						String colorPlusFour = userStringInput.nextLine();
+	
 						System.out.println("The color is now " + colorPlusFour + ".");
 						discard.add(player.get(card - 1));
 						player.remove(card - 1);
