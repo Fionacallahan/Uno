@@ -44,8 +44,13 @@ public class Main
 				Deck.shuffle();
 				deal();
 				start();
-				while (oneDeck.size() > 1)
+				while (oneDeck.size() >= 1)
 					{
+					
+						for (int i = 0; i <= 5; i ++)
+						{
+							System.out.println(" ");
+						}
 						if (currentPlayerNumber == 1 || currentPlayerNumber == 5)
 							{
 								playerName = playerOne;
@@ -54,11 +59,14 @@ public class Main
 						else if (currentPlayerNumber == 2 || currentPlayerNumber == 6)
 							{
 								playerName = playerTwo;
+								currentPlayerNumber = 2;
 								play(twoDeck);
+								
 							}
 						else if (currentPlayerNumber == 3 || currentPlayerNumber == -1)
 							{
 								playerName = playerThree;
+								currentPlayerNumber = 3;
 								play(threeDeck);
 							}
 						else if (currentPlayerNumber == 4 || currentPlayerNumber == 0)
@@ -66,6 +74,26 @@ public class Main
 								playerName = playerFour;
 								play(fourDeck);
 							}
+						
+						if (oneDeck.size() == 1)
+						{
+							System.out.println(playerOne + " has UNO!");
+						}
+						else if (twoDeck.size() == 1)
+						{
+							System.out.println(playerTwo + " has UNO!");
+						}
+						else if (threeDeck.size() == 1)
+						{
+							System.out.println(playerThree + " has UNO!");
+						}
+						else if (fourDeck.size() == 1)
+						{
+							System.out.println(playerFour + " has UNO!");
+						}
+						else {
+						
+						}
 						
 					seeIfWin();
 						
@@ -92,7 +120,7 @@ public class Main
 		public static void start()
 			{
 				discard.add(Deck.deck.get(0));
-				System.out.println("The top card in the deck is " + discard.get(discard.size() - 1).getColor() + " " + discard.get(discard.size() - 1).getIcon());
+				
 			}
 		
 		
@@ -100,22 +128,34 @@ public class Main
 			{
 				System.out.println("Top card in deck: " + discard.get(discard.size() - 1).getColor() + " " + discard.get(discard.size() - 1).getIcon());
 				System.out.println();
-				System.out.println(playerName + ", its your turn. Here is your deck. Type the number next to the card you would like to play. If you cannot play, and would like to draw, press an 8");
+				System.out.println(playerName + ", its your turn. Here is your deck. Type the number next to the card you would like to play.");
+				System.out.println("If you cannot play, and would like to draw, press a 0");
 				for (int i = 0; i <= player.size() - 1; i ++)
 					{
 						System.out.println(i + 1 + ") " + player.get(i).getColor() + " " +  player.get(i).getIcon());
 					}
 				int card = userIntInput.nextInt();
 				
-				if (card == 8)
-					{
-						player.add(Deck.deck.get(0));
-						Deck.deck.remove(0);
-						//play(player);
-					}
-				else if (player.get(card - 1).getIcon().equals("reverse")) // REVERSE
+				if (card == 0)
+				{
+					player.add(Deck.deck.get(0));
+					Deck.deck.remove(0);
+					//play(player);
+				}
+				else {
+				
+				String icons = player.get(card - 1).getIcon();
+				String colors = player.get(card - 1).getColor();
+					
+				
+				
+				if (icons == discard.get(discard.size() - 1).getIcon() || colors == discard.get(discard.size() - 1).getColor() || discard.get(discard.size() - 1).getIcon().equals("wild") || discard.get(discard.size() - 1).getIcon().equals("+4") || icons.equals("wild") || icons.equals("+4") || card == 8)
+				{
+					
+				if (icons.equals("reverse")) // REVERSE
 					{
 						discard.add(player.get(card - 1));
+						player.remove(card - 1);
 						if (clockwise == false) {
 							clockwise = true;
 							currentPlayerNumber += 1;
@@ -125,7 +165,7 @@ public class Main
 							currentPlayerNumber -= 1;
 						}
 					}
-				else if (player.get(card - 1).getIcon().equals("+2")) //PLUS TWO
+				else if (icons.equals("+2")) //PLUS TWO
 					{
 						if (currentPlayerNumber == 1 || currentPlayerNumber == 5)
 							{
@@ -136,6 +176,7 @@ public class Main
 												twoDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerTwo + ", You lost a turn and gained two new cards.");
 									}
 								else
 									{
@@ -144,6 +185,7 @@ public class Main
 												fourDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerFour + ", You lost a turn and gained two new cards.");
 									}
 							}
 						else if (currentPlayerNumber == 2 || currentPlayerNumber == 6)
@@ -155,6 +197,7 @@ public class Main
 												threeDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerThree + ", You lost a turn and gained two new cards.");
 									}
 								else
 									{
@@ -163,6 +206,7 @@ public class Main
 												oneDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerOne + ", You lost a turn and gained two new cards.");
 									}
 								
 							}
@@ -175,6 +219,7 @@ public class Main
 												fourDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerFour+ ", You lost a turn and gained two new cards.");
 									}
 								else if (clockwise == false)
 									{
@@ -183,6 +228,7 @@ public class Main
 												twoDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerTwo + ", You lost a turn and gained two new cards.");
 									}
 								
 							}
@@ -195,6 +241,7 @@ public class Main
 												oneDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerOne + ", You lost a turn and gained two new cards.");
 									}
 								else {
 									for (int i = 0; i <= 1 ; i ++)
@@ -202,10 +249,12 @@ public class Main
 											threeDeck.add(Deck.deck.get(i));
 											Deck.deck.remove((i));
 										}
+									System.out.println(playerThree + ", You lost a turn and gained two new cards.");
 								}
 						
 							}
 						discard.add(player.get(card - 1));
+						player.remove(card - 1);
 						if (clockwise == false)
 							{
 								currentPlayerNumber -= 2;
@@ -216,7 +265,7 @@ public class Main
 							}
 						
 					}
-				else if (player.get(card - 1).getIcon().equals("wild +4")) // PLUSFOUR
+				else if (icons.equals("+4")) // PLUSFOUR
 					{
 						
 						if (currentPlayerNumber == 1 || currentPlayerNumber == 5)
@@ -228,6 +277,7 @@ public class Main
 												twoDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerTwo + ", You lost a turn and gained four new cards.");
 									}
 								else
 									{
@@ -236,6 +286,7 @@ public class Main
 												fourDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerFour + ", You lost a turn and gained four new cards.");
 									}
 							}
 						else if (currentPlayerNumber == 2 || currentPlayerNumber == 6)
@@ -247,6 +298,7 @@ public class Main
 												threeDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerThree + ", You lost a turn and gained four new cards.");
 									}
 								else
 									{
@@ -255,6 +307,7 @@ public class Main
 												oneDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerOne + ", You lost a turn and gained four new cards.");
 									}
 								
 							}
@@ -267,6 +320,7 @@ public class Main
 												fourDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerFour + ", You lost a turn and gained four new cards.");
 									}
 								else if (clockwise == false)
 									{
@@ -275,6 +329,7 @@ public class Main
 												twoDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerTwo + ", You lost a turn and gained four new cards.");
 									}
 								
 							}
@@ -287,6 +342,7 @@ public class Main
 												oneDeck.add(Deck.deck.get(i));
 												Deck.deck.remove((i));
 											}
+										System.out.println(playerOne + ", You lost a turn and gained four new cards.");
 									}
 								else {
 									for (int i = 0; i <= 3; i ++)
@@ -294,6 +350,7 @@ public class Main
 											threeDeck.add(Deck.deck.get(i));
 											Deck.deck.remove((i));
 										}
+									System.out.println(playerThree + ", You lost a turn and gained four new cards.");
 								}
 						
 							}
@@ -301,6 +358,7 @@ public class Main
 						String colorPlusFour = userStringInput.nextLine();
 						System.out.println("The color is now " + colorPlusFour + ".");
 						discard.add(player.get(card - 1));
+						player.remove(card - 1);
 						if (clockwise == false)
 							{
 								currentPlayerNumber -= 2;
@@ -311,9 +369,10 @@ public class Main
 							}
 					}
 				
-				else if (player.get(card - 1).getIcon().equals("skip")) //SKIP
+				else if (icons.equals("skip")) //SKIP
 					{
 						discard.add(player.get(card - 1));
+						player.remove(card - 1);
 						if (clockwise == false)
 							{
 								currentPlayerNumber -= 2;
@@ -324,12 +383,13 @@ public class Main
 							}
 					}
 					
-				else if (player.get(card - 1).getIcon().equals("wild")) // WILD
+				else if (icons.equals("wild")) // WILD
 					{
 						System.out.println("What color would you like to change the card to?");
 						String colorPlusFour = userStringInput.nextLine();
 						System.out.println("The color is now " + colorPlusFour + ".");
 						discard.add(player.get(card - 1));
+						player.remove(card - 1);
 						if (clockwise == false)
 							{
 								currentPlayerNumber--;
@@ -357,8 +417,14 @@ public class Main
 				//discard.add(oneDeck.get(card - 1));
 				//oneDeck.remove(card - 2); 
 				
-				System.out.println("The new topcard in the deck is " + discard.get(discard.size() - 1).getColor() + " "  + discard.get(discard.size() - 1).getIcon());
+				//System.out.println("The new topcard in the deck is " + discard.get(discard.size() - 1).getColor() + " "  + discard.get(discard.size() - 1).getIcon());
 				
+				}
+				else {
+					System.out.println("OOPS! You are not allowed to play that card. Try again");
+					
+				}
+				}
 				
 			}
 		
@@ -366,21 +432,21 @@ public class Main
 		
 		public static void seeIfWin()
 		{
-			if (oneDeck.size() == 1)
+			if (oneDeck.size() == 0)
 				{
-					System.out.println(playerOne + " has UNO!");
+					System.out.println(playerOne + " has WON!");
 				}
-			else if (twoDeck.size() == 1)
+			else if (twoDeck.size() == 0)
 				{
-					System.out.println(playerTwo + " has UNO!");
+					System.out.println(playerTwo + " has WON!");
 				}
-			else if (threeDeck.size() == 1)
+			else if (threeDeck.size() == 0)
 				{
-					System.out.println(playerThree + " has UNO!");
+					System.out.println(playerThree + " has WON!");
 				}
-			else if (fourDeck.size() == 1)
+			else if (fourDeck.size() == 0)
 				{
-					System.out.println(playerFour + " has UNO!");
+					System.out.println(playerFour + " has WON!");
 				}
 		}
 		
